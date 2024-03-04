@@ -22,13 +22,16 @@ export default {
 </script>
 
 <template>
-
-        <ul>
-            <li v-for="card in store.cards">
-            {{ card.name }}
-            </li>
-        </ul>
-    
+<div class="container">
+    <ul>
+        <CardItem
+        v-for="card in store.cards"
+        :card="card">
+           
+        
+        </CardItem>
+    </ul>
+    </div>
 </template>
 
 
