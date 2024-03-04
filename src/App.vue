@@ -11,6 +11,7 @@ import AppNav from './components/AppNav.vue'
 export default {
     data() {
         return {
+            loading: true,
             cards: [],
 
             store,
@@ -18,9 +19,11 @@ export default {
     },
 
     created() {
-        axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0').then(res => {
+        axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=600&offset=2000').then(res => {
 
-            this.store.cards = res.data.data
+            this.store.cards = res.data.data;
+
+            this.loading = false;
         })
     },
 
@@ -37,12 +40,39 @@ export default {
 </script>
 
 <template>
-    <AppNav></AppNav>
-    <CardList>
-
-    </CardList>
+    
+    <div v-if="loading" class="loader">
+        <div id="logo-wait">
+            
+            <img src="/public/img/logo.png" alt="">
+            
+            <span>Please wait, we are loading your favorite cards!</span>
+            
+        </div>
+    </div>
+    <AppNav v-if="!loading"></AppNav>
+    <CardList v-if="!loading"></CardList>
 </template>
 
 <style lang="scss">
 @use './styles/general.scss' as *;
+@use './styles/variables' as *;
+
+#logo-wait {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    img {
+        max-width: 700px;
+        padding-bottom: 50px;
+    }
+
+    span {
+        font-weight: bold;
+        font-size: 40px;
+    }
+}
 </style>
