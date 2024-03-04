@@ -6,6 +6,8 @@ import {store} from './store.js';
 
 import CardList from './components/CardList.vue';
 
+import AppNav from './components/AppNav.vue'
+
 export default {
     data() {
         return {
@@ -24,6 +26,7 @@ export default {
 
     components: {
      CardList,
+     AppNav
   },
     
     methods: {
@@ -34,6 +37,7 @@ export default {
 </script>
 
 <template>
+    <AppNav></AppNav>
     <CardList>
 
     </CardList>
