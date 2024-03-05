@@ -30,7 +30,7 @@ export default {
 
     <div class="showed-cards">
         <div id="result">
-            Found {{ store.totalCards}} cards
+            We found {{ store.totalCards}} cards for "{{ store.selectItem }}" Archetype
         </div>
     </div>
     <ul>
@@ -58,8 +58,10 @@ export default {
         #result {
             display: block;
             padding: 24px;
-            background-color: rgba(122, 12, 4, 0.288);
+            background-color: rgba(53, 4, 0, 0.288);
             margin-bottom: 40px;
+            text-transform: uppercase;
+            font-weight: 700;
         }
     } 
     ul {

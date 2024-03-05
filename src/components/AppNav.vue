@@ -21,7 +21,7 @@ export default {
 
 nav {
     display: flex;
-    padding: 30px 0;
+    padding-top: 30px;
     justify-content: center;
 
     #logo {

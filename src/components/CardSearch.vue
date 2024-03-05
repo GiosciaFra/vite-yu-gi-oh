@@ -33,7 +33,7 @@ export default {
 <template>
 <div class="container">
     <div class="dropdown">
-    <button class="dropdown-btn">Select Archetype</button>
+    <button class="dropdown-btn">{{store.selectItem || 'Select Archetype'}}</button>
     <ul class="dropdown-content">
             <li @click="selectArchetype(archetype.archetype_name)" 
             v-for="archetype in store.archetypeList" 

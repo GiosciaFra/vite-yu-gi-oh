@@ -26,6 +26,7 @@ export default {
              axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=' + this.store.selectItem)
              .then(res => {
                 this.store.cards = res.data.data;
+                this.store.totalCards = res.data.data.length;
         
       });
      
@@ -35,7 +36,6 @@ export default {
         axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=60&offset=0').then(res => {
 
             this.store.cards = res.data.data;
-            this.store.totalCards = res.data.meta.total_rows;
             this.loading = false;
         })
     },
@@ -65,7 +65,7 @@ export default {
         </div>
     </div>
     <AppNav v-if="!loading"></AppNav>
-    <CardSearch @search="searchArchetype()"></CardSearch>
+    <CardSearch  v-if="!loading" @search="searchArchetype()"></CardSearch>
     <CardList v-if="!loading"></CardList>
 </template>
 
