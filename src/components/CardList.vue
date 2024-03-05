@@ -2,13 +2,15 @@
 
 import CardItem from './CardItem.vue';
 
+
 import {store} from '../store.js';
+
 
 export default {
     name: 'CardList',
 
     components: {
-        CardItem,
+        CardItem
     },
 
     data() {
@@ -25,9 +27,10 @@ export default {
 
 <div class="container">
 
+
     <div class="showed-cards">
         <div id="result">
-            Found {{ store.cards.length }} cards
+            Found {{ store.totalCards}} cards
         </div>
     </div>
     <ul>
@@ -42,18 +45,23 @@ export default {
 </template>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use '../styles/general' as *;
 @use '../styles/variables' as *;
 
 .container {
     background-color: rgb(255, 134, 134);
-    #result {
-        display: block;
-        padding: 24px;
-        background-color: rgba(122, 12, 4, 0.288);
-        margin-bottom: 40px;
-    }
+
+    .showed-cards {
+        padding-top: 30px;
+        
+        #result {
+            display: block;
+            padding: 24px;
+            background-color: rgba(122, 12, 4, 0.288);
+            margin-bottom: 40px;
+        }
+    } 
     ul {
         display: flex;
         gap: $cardGap;

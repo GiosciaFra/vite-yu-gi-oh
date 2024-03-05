@@ -8,6 +8,8 @@ import CardList from './components/CardList.vue';
 
 import AppNav from './components/AppNav.vue'
 
+import CardSearch from './components/CardSearch.vue';
+
 export default {
     data() {
         return {
@@ -19,17 +21,18 @@ export default {
     },
 
     created() {
-        axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=600&offset=2000').then(res => {
+        axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=600&offset=0').then(res => {
 
             this.store.cards = res.data.data;
-
+            this.store.totalCards = res.data.meta.total_rows;
             this.loading = false;
         })
     },
 
     components: {
      CardList,
-     AppNav
+     AppNav,
+     CardSearch
   },
     
     methods: {
@@ -51,6 +54,7 @@ export default {
         </div>
     </div>
     <AppNav v-if="!loading"></AppNav>
+    <CardSearch></CardSearch>
     <CardList v-if="!loading"></CardList>
 </template>
 
