@@ -53,7 +53,7 @@ export default {
     background-color: rgb(255, 134, 134);
 
     .showed-cards {
-        padding-top: 30px;
+
         
         #result {
             display: block;

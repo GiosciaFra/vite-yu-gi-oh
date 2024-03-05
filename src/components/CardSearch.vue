@@ -1,21 +1,45 @@
 <script>
 
 import { store } from '../store';
+import axios from 'axios';
 
 export default {
     name: 'CardSearch',
+
+    data() {
+        return {
+        store,
+        }
+  },
+
+  methods: {
+    selectArchetype(archetypeName) {
+      this.store.selectItem = archetypeName;
+      this.$emit('search', archetypeName);
+    },
+  },
+
+  
+  created() {
+    axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
+      .then(res => {
+        this.store.archetypeList = res.data;
+      });
+  },
+
 }
 </script>
 
 <template>
-
-<div class="dropdown">
-  <button class="dropdown-btn">Select Archetype</button>
-  <div class="dropdown-content">
-    <a href="#">Opzione 1</a>
-    <a href="#">Opzione 2</a>
-    <a href="#">Opzione 3</a>
-  </div>
+<div class="container">
+    <div class="dropdown">
+    <button class="dropdown-btn">Select Archetype</button>
+    <ul class="dropdown-content">
+            <li @click="selectArchetype(archetype.archetype_name)" 
+            v-for="archetype in store.archetypeList" 
+            class="dropdown-item">{{ archetype.archetype_name }}</li>
+    </ul>
+</div>
 </div>
 
 
@@ -36,7 +60,7 @@ export default {
   &-btn {
     background-color: #ffffff;
     color: #ff5858;
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
     cursor: pointer;
   }
@@ -48,8 +72,11 @@ export default {
     min-width: 160px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
     z-index: 1;
+    overflow-y: scroll;
+    max-height: 300px;
+    cursor: pointer;
 
-    a {
+    li {
       color: black;
       padding: 12px 16px;
       text-decoration: none;

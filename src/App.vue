@@ -20,8 +20,19 @@ export default {
         }
     },
 
+    methods: {
+        
+        searchArchetype() {
+             axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=' + this.store.selectItem)
+             .then(res => {
+                this.store.cards = res.data.data;
+        
+      });
+     
+  },
+  },
     created() {
-        axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=600&offset=0').then(res => {
+        axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=60&offset=0').then(res => {
 
             this.store.cards = res.data.data;
             this.store.totalCards = res.data.meta.total_rows;
@@ -35,11 +46,11 @@ export default {
      CardSearch
   },
     
-    methods: {
-        
-    },
+
+
+    }
     
-}
+
 </script>
 
 <template>
@@ -47,14 +58,14 @@ export default {
     <div v-if="loading" class="loader">
         <div id="logo-wait">
             
-            <img src="/public/img/logo.png" alt="">
+            <img src="/img/logo.png" alt="">
             
             <span>Please wait, we are loading your favorite cards!</span>
             
         </div>
     </div>
     <AppNav v-if="!loading"></AppNav>
-    <CardSearch></CardSearch>
+    <CardSearch @search="searchArchetype()"></CardSearch>
     <CardList v-if="!loading"></CardList>
 </template>
 
